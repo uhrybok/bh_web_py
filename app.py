@@ -16,7 +16,7 @@ def create_app():
         user = session_model.current_user()
 
         if user:
-            login_menu = f"Выйти ({user["fname"]})"
+            login_menu = f"Выйти ({user['fname']})"
             login_url = "/logout"
 
         return {
