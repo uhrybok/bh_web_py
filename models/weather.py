@@ -46,7 +46,7 @@ def prepare_data(data, res):
             res["temp"] = temp_c(data["main"]["temp"])
             select_icon(data, res)
             return
-    res["temp"] = f"City {res["name"]} not found"
+    res["temp"] = f"City {res['name']} not found"
     
             
 def city(ct):
