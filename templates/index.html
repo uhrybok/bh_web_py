@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+        <h1>Flask server - главная страница</h1>
+        {% if user %}
+            <h2>Привет {{ user.fname }} {{ user.lname }}!</h2>
+        {% else %}
+            <p>Авторизуйтесь для использования сайта</p>
+        {% endif%}
+{% endblock %}

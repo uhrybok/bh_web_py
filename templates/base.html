@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}<!-- Titles -->>{% endblock %} - Flask server</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header mark="header">
+        <nav>
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>        
+                <li><a href="/weather">Погода</a></li>
+                <li><a href="/grid">Грид</a></li>
+                <li><a href="{{ login_url }}">{{ login_menu }}</a></li>
+            </ul>
+        </nav>
+    </header>    
+
+    <main mark="main">
+        {% block content %}
+        <!-- Pages-->
+        {% endblock %}    
+    </main>
+
+    <footer mark="footer">
+        <p>© 2025 Roga & Kopyta Ltd </p>
+    </footer>
+</body>
+</html>

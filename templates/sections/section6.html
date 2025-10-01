@@ -1,0 +1,37 @@
+                <style>
+                    figcaption{
+                        position: absolute;
+                        left: 250px;
+                        bottom: 240px;
+                        background: white;
+                        border: 1px solid black;
+                        font-size: 0.7em;
+                        padding: 3px;
+                    }
+
+                    progress{
+                        height: 1.2em;
+                        border-radius: 1px;
+                        border: 1px solid gray;
+                    }
+                    progress::-webkit-progress-bar {
+                        background: 
+                            linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0) 50%),
+                            linear-gradient(90deg, #c7c7c7 70%, #a7a7a7);
+                    }
+                    progress::-webkit-progress-value {
+                        background: 
+                            linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0) 50%),
+                            linear-gradient(90deg, #a8e0ab 60%, #4caf50);
+                    }
+                </style>
+
+                <p><strong>Карта сокровищ</strong></p>
+                <hr>
+                <figure style="position: relative;">
+                    <img style="max-height: 360px;" src="https://img.freepik.com/premium-vector/map-treasures-paper-parchment_8071-3421.jpg" alt="Карта">
+                    <figcaption>Клад</figcaption>
+                </figure>
+                <label for="level">Пройдено:</label>
+                <progress id="level" value="60" max="100">60%</progress>
+                <hr>

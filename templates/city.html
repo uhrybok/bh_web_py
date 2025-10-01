@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Weather in {{ data.name }}{% endblock %}
+
+{% block content %}
+        <h1>Погода в городе</h1>
+        <div class="flex-h">
+            <ul style="list-style-type:none;">
+                <li><a class="btn" href="/weather/london">London</a></li>        
+                <li><a class="btn" href="/weather/minsk">Minsk</a></li>        
+                <li><a class="btn" href="/weather/new%20york">New York</a></li>        
+                <li><a class="btn" href="/weather/stambul">Stambul</a></li>        
+            </ul>
+            <div class="flex-v">
+                <h2>{{ data.name }}</h2>
+                <div class="flex-h center">
+                    <p>{{ data.temp }}</p>
+                    {% if data.icon %}
+                        <img class="icon" src="{{ data.icon }}" alt="{{ data.icon_alt }}">
+                    {% endif %}    
+                </div>
+            </div>
+        </div>
+{% endblock %}

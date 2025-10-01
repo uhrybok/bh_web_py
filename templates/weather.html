@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Weather{% endblock %}
+
+{% block content %}
+        <h1>Погода онлайн</h1>
+        <div class="flex-h">
+            <ul style="list-style-type:none;">
+                <li><a class="btn" href="/weather/london">London</a></li>        
+                <li><a class="btn" href="/weather/minsk">Minsk</a></li>        
+                <li><a class="btn" href="/weather/new%20york">New York</a></li>        
+                <li><a class="btn" href="/weather/stambul">Stambul</a></li>        
+            </ul>
+        </div>
+{% endblock %}
