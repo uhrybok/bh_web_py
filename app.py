@@ -11,13 +11,13 @@ def create_app():
     @app.context_processor
     def inject_login():
         login_menu = "Войти"
-        login_url = "/login"
+        login_url = "main.login_page"
 
         user = session_model.current_user()
 
         if user:
             login_menu = f"Выйти ({user['fname']})"
-            login_url = "/logout"
+            login_url = "main.logout"
 
         return {
             "login_menu": login_menu,

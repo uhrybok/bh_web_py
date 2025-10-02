@@ -14,10 +14,10 @@
     <header mark="header">
         <nav>
             <ul class="menu">
-                <li><a href="/">Главная</a></li>        
-                <li><a href="/weather">Погода</a></li>
-                <li><a href="/grid">Грид</a></li>
-                <li><a href="{{ login_url }}">{{ login_menu }}</a></li>
+                <li><a href="{{ url_for('main.index') }}">Главная</a></li>        
+                <li><a href="{{ url_for('main.weather_page') }}">Погода</a></li>
+                <li><a href="{{ url_for('main.hw5') }}">Грид</a></li>
+                <li><a href="{{ url_for(login_url) }}">{{ login_menu }}</a></li>
             </ul>
         </nav>
     </header>    
