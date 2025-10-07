@@ -11,7 +11,7 @@ def set_session(user):
     session["username"] = user["login"]
 
 def load_users():
-    with open(users_path(), "r", encoding="utf-8") as j:
+    with open(users_path(), "a+", encoding="utf-8") as j:
         try:
             users = json.load(j)
         except:
