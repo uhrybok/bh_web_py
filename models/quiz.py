@@ -51,8 +51,8 @@ def db_add_test_data():
     db.create_all()
 
     users = [
-        User('Пуаро'),
-        User('Марпл')
+        User('Poirot'),
+        User('Marple')
     ]    
 
     quizes = [
