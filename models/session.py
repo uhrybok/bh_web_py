@@ -12,6 +12,7 @@ def set_session(user):
 
 def load_users():
     with open(users_path(), "a+", encoding="utf-8") as j:
+        j.seek(0)
         try:
             users = json.load(j)
         except:
