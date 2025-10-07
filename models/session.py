@@ -48,7 +48,7 @@ def add_user(immu_form):
     else:
         form["password"] = generate_password_hash(form["password"])
         users.append(form)    
-        with open(users_path(), "w", encoding="utf-8") as j:
+        with open(users_path(), "a", encoding="utf-8") as j:
             json.dump(users, j, ensure_ascii=False, indent=4)
             res = True
 
