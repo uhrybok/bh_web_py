@@ -48,6 +48,7 @@ class Question(IdNameMixin, db.Model):
 
 def db_add_test_data():
     db.drop_all()
+    db.session.commit()
     db.create_all()
 
     users = [
