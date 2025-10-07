@@ -1,0 +1,18 @@
+<form action="" method="post">
+    <div class="h-wrapper">
+        <h2>Список Квизов</h2>
+        <button type="submit" name="action" value="new">+</button>
+    </div>
+    {% for q in data %}
+        {% if loop.first %}
+            <input type="radio" name="quiz" id="{{ q.id }}" value="{{ q.id }}" checked>
+        {% else %}    
+            <input type="radio" name="quiz" id="{{ q.id }}" value="{{ q.id }}">
+        {% endif %}    
+        <label for="{{ q.id }}">{{ q.name }}</label>
+    {% endfor %}
+
+    <div class="h-wrapper">
+        <button type="submit" name="action" value="pass">Начать</button>
+    </div>
+</form>

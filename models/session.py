@@ -1,17 +1,17 @@
-from flask import session
+from flask import session, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-USERS_PATH = os.path.join(BASE_DIR, "..", "users.json")
+def users_path():
+    return os.path.join(current_app.instance_path, "users.json")
 
 def set_session(user):
     session["logged_in"] = True
     session["username"] = user["login"]
 
 def load_users():
-    with open(USERS_PATH, "r", encoding="utf-8") as j:
+    with open(users_path(), "r", encoding="utf-8") as j:
         try:
             users = json.load(j)
         except:
@@ -48,7 +48,7 @@ def add_user(immu_form):
     else:
         form["password"] = generate_password_hash(form["password"])
         users.append(form)    
-        with open(USERS_PATH, "w", encoding="utf-8") as j:
+        with open(users_path(), "w", encoding="utf-8") as j:
             json.dump(users, j, ensure_ascii=False, indent=4)
             res = True
 
@@ -94,3 +94,4 @@ def current_user():
     if is_login():
         users = load_users()
         return next((u for u in users if u["login"] == session["username"]), None)
+    

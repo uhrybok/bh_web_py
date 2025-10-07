@@ -1,0 +1,20 @@
+<form action="" method="post">
+    <div class="h-wrapper">
+        <h2>{{ data.name }}</h2>
+    </div>
+    <p>Вопрос: <b>{{ question[0].name }}</b></p>
+
+    {% for q in question[1] %}
+        {% if loop.first %}
+            <input type="radio" name="answer" id="{{ q }}" value="{{ q }}" checked>
+        {% else %}    
+            <input type="radio" name="answer" id="{{ q }}" value="{{ q }}">
+        {% endif %}    
+        <label for="{{ q }}">{{ q }}</label>
+    {% endfor %}
+
+    <div class="h-wrapper">
+        <button type="submit" name="action" value="next">Продолжить</button>
+        <button type="submit" name="action" value="list">Отмена</button>
+    </div>
+</form>

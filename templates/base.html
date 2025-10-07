@@ -15,9 +15,10 @@
         <nav>
             <ul class="menu">
                 <li><a href="{{ url_for('main.index') }}">Главная</a></li>        
+                <li><a href="{{ url_for('main.quiz_page') }}">Квизы</a></li>
                 <li><a href="{{ url_for('main.weather_page') }}">Погода</a></li>
                 <li><a href="{{ url_for('main.hw5') }}">Грид</a></li>
-                <li><a href="{{ url_for(login_url) }}">{{ login_menu }}</a></li>
+                <li><a href="{{ url_for(log_in_out_url) }}">{{ log_in_out_menu }}</a></li>
             </ul>
         </nav>
     </header>    
