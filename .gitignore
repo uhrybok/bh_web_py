@@ -7,6 +7,7 @@ __pycache__/
 .vscode/
 djproject.code-workspace
 c.bat
+run_gun.sh
 
 # C extensions
 *.so
