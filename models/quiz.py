@@ -118,7 +118,6 @@ def start_quiz(data):
     return [question, answers]
 
 def score(form, question):
-    print(form.get('answer'))
     return 1 if form.get('answer') == question.answer else 0
 
 def check_answer(form):

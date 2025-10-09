@@ -13,8 +13,6 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(app.instance_path, 'db_quiz.db')}"
 
     db.init_app(app)
-    with app.app_context():
-        db_add_test_data()
 
     @app.context_processor
     def inject_login():
