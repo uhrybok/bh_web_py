@@ -8,6 +8,7 @@ __pycache__/
 djproject.code-workspace
 c.bat
 run_gun.sh
+activate.sh
 
 # C extensions
 *.so
