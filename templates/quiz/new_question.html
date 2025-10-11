@@ -1,0 +1,16 @@
+<form action="" method="post">
+    <div class="h-wrapper">
+        <h2>Новый вопрос</h2>
+    </div>    
+    <input type="text" name="name" placeholder="Вопрос" value="{{ name }}">
+
+    <input type="text" name="answer" placeholder="Ответ" value="{{ answer }}">
+    <input type="text" name="wrong1" placeholder="Вариант 2" value="{{ wrong1 }}">
+    <input type="text" name="wrong2" placeholder="Вариант 3" value="{{ wrong2 }}">
+    <input type="text" name="wrong3" placeholder="Вариант 4" value="{{ wrong3 }}">
+
+    <div class="h-wrapper margin-top">
+        <button type="submit" name="action" value="add_question">Добавить</button>
+        <button type="submit" name="action" value="list">Отмена</button>
+    </div>
+</form>

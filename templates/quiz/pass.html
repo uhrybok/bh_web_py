@@ -1,6 +1,6 @@
 <form action="" method="post">
     <div class="h-wrapper">
-        <h2>{{ data.name }}</h2>
+        <h2>{{ quiz.name }}</h2>
     </div>
     <p>Вопрос: <b>{{ question[0].name }}</b></p>
 
@@ -13,7 +13,7 @@
         <label for="{{ q }}">{{ q }}</label>
     {% endfor %}
 
-    <div class="h-wrapper">
+    <div class="h-wrapper margin-top">
         <button type="submit" name="action" value="next">Продолжить</button>
         <button type="submit" name="action" value="list">Отмена</button>
     </div>

@@ -1,0 +1,20 @@
+<form action="" method="post">
+    <div class="h-wrapper">
+        <h2>Изменить квиз</h2>
+    </div>    
+    <p>Название: {{ quiz.name }}</p>
+    <p>Вопросы:</p>
+
+    {% for q in question[0] %}
+        <label><input type="checkbox" name="question" value="{{ q.id }}" checked>{{ q.name }}</label>
+    {% endfor %}
+
+    {% for q in question[1] %}
+        <label><input type="checkbox" name="question" value="{{ q.id }}">{{ q.name }}</label>
+    {% endfor %}
+
+    <div class="h-wrapper margin-top">
+        <button type="submit" name="action" value="save">Сохранить</button>
+        <button type="submit" name="action" value="list">Отмена</button>
+    </div>
+</form>

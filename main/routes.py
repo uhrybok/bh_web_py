@@ -64,8 +64,8 @@ def hw5():
 @main.route("/quiz/", methods=['GET', 'POST'])
 @check_login
 def quiz_page():
-    mode, data, question = quiz.quiz_logic(request.method, request.form)
-    return render_template('quiz.html', mode = mode, data = data, question = question)
+    mode, data = quiz.quiz_logic(request.method, request.form)
+    return render_template('quiz.html', mode = mode, quiz = data[0], question = data[1])
 
 # Сработает если ошибка 404 - т.е. любой другой путь который выше не предусмотрен
 @main.errorhandler(404)

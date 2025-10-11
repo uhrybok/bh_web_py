@@ -265,6 +265,26 @@ header, main, footer, section {
 }
 
 /* Quiz */
+.quiz h2, .quiz ul {
+    margin: 0;
+}
+
+.quiz li {
+    padding-bottom: 6px;
+}
+
+.quiz form {
+    display: flex;
+    flex-direction: column; 
+    gap: 2px;              
+    margin-top: 24px;
+    max-width: 45%;
+}
+
+.quiz .margin-top {
+    margin-top: 24px !important; 
+}
+
 .quiz .h-wrapper {
     display: flex;
     gap: 36px;   
@@ -272,12 +292,16 @@ header, main, footer, section {
     margin: 12px 0;           
 }
 
-.quiz form {
-    display: flex;
-    flex-direction: column; 
-    gap: 8px;              
-    margin-top: 36px;
-    max-width: 45%;
+.quiz .form-header {
+    justify-content: space-between;
+}
+
+.quiz .buttons {
+    gap: 12px;              
+}
+
+.quiz input[type="checkbox"] {
+    margin-bottom: 6px;
 }
 
 .quiz input[type="radio"]{
@@ -306,6 +330,14 @@ header, main, footer, section {
     min-width: auto;      
     max-width: auto;     
     padding: 6px 12px; 
+}    
+
+.quiz .buttons button[type="submit"], 
+.quiz .buttons input[type="submit"] {
+    width: 38px;
+    height: 36px;      
+    padding: 0; 
+    text-align: center;
 }    
 
 .quiz button[type="submit"]:hover, 

@@ -1,11 +1,11 @@
 <form action="" method="post">
     <div class="h-wrapper">
-        <h2>Вы прошли {{ data.name }}</h2>
+        <h2>Вы прошли {{ quiz.name }}</h2>
     </div>
 
-    <p>Ваш результат {{ question[1] }} из {{ question[0] }}</p>
+    <p>Ваш результат {{ question[0] }} из {{ question[1] }}</p>
     
-    <div class="h-wrapper">
+    <div class="h-wrapper margin-top">
         <button type="submit" name="action" value="list">Завершить</button>
     </div>
 </form>

@@ -89,15 +89,13 @@ def db_add_test_data():
     db.session.add_all(users + quizes + questions)
     db.session.commit()
 
-def add_quiz(data):
-    if 'name' in data: 
-        quiz = data.get('name')
+def add_quiz(form):
+    if 'name' in form: 
+        quiz = form.get('name')
         user = db.session.get(User, 1)
         quiz = Quiz(quiz, user)
         db.session.add(quiz)
         db.session.commit()
-        return quiz
-    return None
 
 def get_quiz(quize_id=None):
     if quize_id:
@@ -106,12 +104,28 @@ def get_quiz(quize_id=None):
     else:
         return Quiz.query.order_by(Quiz.name).all()
 
-def start_quiz(data):
+def save_quiz(form):
+    quiz = get_quiz(session_model.session['quiz_id'])
+    question = []
+
+    for id in form.getlist("question"):
+        question.append(Question.query.filter_by(id=int(id)).one_or_none())
+
+    quiz.question = question
+    db.session.commit()
+
+def add_question(form):
+    if 'name' in form: 
+        question = Question(form.get('name'), form.get('answer'), form.get('wrong1'), form.get('wrong2'), form.get('wrong3'))
+        db.session.add(question)
+        db.session.commit()
+    
+def start_quiz(quiz):
     session_model.session['right_answers'] = 0
     session_model.session['question_n'] = 0
-    session_model.session['quiz_id'] = data.id
+    session_model.session['quiz_id'] = quiz.id
 
-    question = data.question[0]
+    question = quiz.question[0]
     answers = [question.answer, question.wrong1, question.wrong2, question.wrong3 ]
     shuffle(answers)
    
@@ -121,61 +135,88 @@ def score(form, question):
     return 1 if form.get('answer') == question.answer else 0
 
 def check_answer(form):
-    data = get_quiz(session_model.session['quiz_id'])
+    quiz = get_quiz(session_model.session['quiz_id'])
     mode = "pass"
-    question = None
-    answers = None
+    question = [None] * 2
 
-    session_model.session['right_answers'] += score(form, data.question[session_model.session['question_n']])
+    session_model.session['right_answers'] += score(form, quiz.question[session_model.session['question_n']])
     session_model.session['question_n'] += 1
 
-    if session_model.session['question_n'] == len(data.question):
+    if session_model.session['question_n'] == len(quiz.question):
         mode = "finish"
-        question = session_model.session['question_n']
-        answers = session_model.session['right_answers']
+        question[0] = session_model.session['right_answers']
+        question[1] = session_model.session['question_n']
     else:    
-        question = data.question[session_model.session['question_n']]
-        answers = [question.answer, question.wrong1, question.wrong2, question.wrong3 ]
-        shuffle(answers)
+        question[0] = quiz.question[session_model.session['question_n']]
+        question[1] = [question[0].answer, question[0].wrong1, question[0].wrong2, question[0].wrong3 ]
+        shuffle(question[1])
     
-    return mode, data, [question, answers]
+    return mode, quiz, question
+
+def get_questions(quiz=None):
+    question = [None] * 2
+
+    if quiz:
+        question[0] = quiz.question
+        question[1] = Question.query.filter(~Question.quiz.any(Quiz.id == quiz.id)).all()
+    else:
+        question[0] = Question.query.all()
+
+    return question
 
 def quiz_logic(method, form):
     mode = "list"
-    data = None
+    quiz = None
     question = None
 
-    def back():
-        nonlocal mode, data
+    def reset():
+        nonlocal mode, quiz, question
         mode = "list"
-        data = get_quiz()
+        quiz = get_quiz()
+        question = get_questions()
         
     if method == "GET":
-        back()
+        reset()
 
     elif method == "POST":
         action = form.get("action") or "list"
 
-        if action == "list":
-            back()
+        if action == "new":
+            mode = "new"
 
-        elif action == "new":
-            mode = "add"
+        elif action == "new_question":
+            mode = "new_question"
 
         elif action == "add":
-            mode = "list"
             add_quiz(form)
-            data = get_quiz()
+            reset()
+
+        elif action == "add_question":
+            add_question(form)
+            reset()
 
         elif action == "pass":
-            data = get_quiz(form.get('quiz'))
-            if len(data.question):
+            quiz = get_quiz(form.get('quiz'))
+            if len(quiz.question):
                 mode = "pass"
-                question = start_quiz(data)
+                question = start_quiz(quiz)
             else:
-                back()
+                reset()
         
         elif action == "next":
-            mode, data, question = check_answer(form)
+            mode, quiz, question = check_answer(form)
 
-    return mode, data, question
+        elif action == "edit":
+            quiz = get_quiz(form.get('quiz'))
+            question = get_questions(quiz)
+            session_model.session['quiz_id'] = quiz.id
+            mode = "edit"
+
+        elif action == "save":
+            save_quiz(form)
+            reset()
+
+        else: # action == "list" or any    
+            reset()
+
+    return mode, [quiz, question]
